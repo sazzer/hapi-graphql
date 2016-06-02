@@ -17,24 +17,39 @@
     "graphql"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "babel src --out-dir lib"
+    "test": "lab -T node_modules/lab-babel -c -S -I $npm_package_config_lab_globals",
+    "cover": "lab -T node_modules/lab-babel -c -s -r lcov | coveralls",
+    "compile": "babel -d lib/ src/",
+    "prepublish": "npm run compile"
   },
   "devDependencies": {
-    "babel": "^5.8.33",
+    "babel-cli": "^6.3.15",
+    "babel-core": "^6.3.15",
     "babel-eslint": "^4.1.6",
+    "babel-loader": "^6.2.0",
+    "babel-polyfill": "^6.3.14",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-stage-0": "^6.3.13",
+    "code": "^2.0.1",
+    "coveralls": "^2.11.4",
     "eslint": "^1.10.3",
     "eslint-plugin-babel": "^3.0.0",
     "graphql": "^0.4.14",
-    "hapi": "^11.1.2"
+    "hapi": "^11.1.2",
+    "lab": "^8.0.0",
+    "lab-babel": "^1.1.1",
+    "webpack": "^1.12.9"
   },
   "dependencies": {
     "accepts": "^1.3.1",
-    "babel-runtime": "^5.8.33",
+    "babel-runtime": "^6.3.13",
     "boom": "^3.0.0",
     "joi": "^7.0.1"
   },
   "peerDependencies": {
     "graphql": "^0.4.14"
+  },
+  "config": {
+    "lab_globals": "__core-js_shared__,regeneratorRuntime,core,Reflect,_babelPolyfill"
   }
 }
